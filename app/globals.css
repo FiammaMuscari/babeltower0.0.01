@@ -15,6 +15,20 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+@font-face {
+  font-family: 'PixelFont';
+  src: url('/fonts/PressStart2P-Regular.ttf') format('truetype');
+}
+
+body {
+  font-family: 'PixelFont', sans-serif;
+}
+
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
 
 body {
   color: rgb(var(--foreground-rgb));
