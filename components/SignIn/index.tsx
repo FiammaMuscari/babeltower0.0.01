@@ -1,7 +1,8 @@
 "use client";
 import { MiniKit } from "@worldcoin/minikit-js";
-
+import { useRouter } from "next/navigation";
 export const SignIn = () => {
+  const route = useRouter();
   const signInWithWallet = async () => {
     if (!MiniKit.isInstalled()) {
       return;
@@ -18,7 +19,7 @@ export const SignIn = () => {
       statement:
         "This is my statement and here is a link https://worldcoin.com/apps",
     });
-    console.log("holaa", MiniKit.walletAddress);
+    console.log("MiniKit.walletAddress: ", MiniKit.walletAddress);
     if (finalPayload.status === "error") {
       return;
     } else {
@@ -32,6 +33,9 @@ export const SignIn = () => {
           nonce,
         }),
       });
+    }
+    if (MiniKit.walletAddress !== null) {
+      route.push("/game");
     }
   };
 
