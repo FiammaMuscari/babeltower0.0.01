@@ -19,9 +19,7 @@ const PixelBabelTowerIdle: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-800 text-white p-4">
-      <h1 className="text-4xl font-bold mb-4 pixel-art">
-        Pixel Babel Tower Idle
-      </h1>
+      <h1 className="text-4xl font-bold mb-4 pixel-art">Pixel Babel Tower</h1>
       <div className="flex gap-4 mb-4">
         <div className="text-xl">Coins: {Math.floor(gameState.coins)}</div>
         <div className="text-xl">Gems: {gameState.gems}</div>
