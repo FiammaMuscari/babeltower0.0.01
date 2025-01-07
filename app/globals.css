@@ -16,19 +16,18 @@
   }
 }
 @font-face {
-  font-family: 'PixelFont';
-  src: url('/fonts/PressStart2P-Regular.ttf') format('truetype');
+  font-family: "PixelFont";
+  src: url("/fonts/PressStart2P-Regular.ttf") format("truetype");
 }
 
 body {
-  font-family: 'PixelFont', sans-serif;
+  font-family: "PixelFont", sans-serif;
 }
 
 .pixel-art {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
-
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -44,4 +43,52 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bounce {
+  animation: bounce 2s infinite;
+}
+
+.bounce-delay {
+  animation: bounce 2s infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes push {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.push-animation {
+  animation: push 0.3s ease;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden {
+  background-color: transparent;
 }
