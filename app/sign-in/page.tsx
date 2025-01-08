@@ -6,6 +6,7 @@ import Link from "next/link";
 
 export default function SignIn() {
   const route = useRouter();
+
   const signInWithWallet = async () => {
     if (!MiniKit.isInstalled()) {
       return;

@@ -3,12 +3,52 @@
 import { Floor } from "@/components/floor";
 import { Header } from "@/components/header";
 import { Navigation } from "@/components/navigation";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GameProvider, useGame } from "../Context/GameContext";
+import { ethers } from "ethers";
+import WLD_ABI from "../../public/ABI/WLD.json";
+import { MiniKit } from "@worldcoin/minikit-js";
 
 function GameContent() {
   const { floors, unlockFloor } = useGame();
   const containerRef = useRef<HTMLDivElement>(null);
+  const [balance, setBalance] = useState<string>("");
+  const WLD_CONTRACT_ADDRESS = "0x2cFc85d8E48F8EAB294be644d9E25C3030863003";
+  // RPC from wordchain
+  const RPC_URL = "https://worldchain-mainnet.g.alchemy.com/public";
+
+  const getBalance = async () => {
+    if (!MiniKit.walletAddress) {
+      throw new Error(
+        "need a wallet bro, you need to connect your wallet first"
+      );
+    }
+    try {
+      // 1. provider
+      const provider = new ethers.JsonRpcProvider(RPC_URL);
+
+      // 2. contract object
+      const contract = new ethers.Contract(
+        WLD_CONTRACT_ADDRESS,
+        WLD_ABI,
+        provider
+      );
+      const userAddress = MiniKit.walletAddress;
+      // 3. balance
+      const balanceWei = await contract.balanceOf(userAddress);
+
+      // 4. Wei to WLD
+      const balanceWLD = ethers.formatUnits(balanceWei, 18);
+
+      setBalance(balanceWLD);
+      console.log("Balance WLD:", balanceWLD);
+    } catch (error) {
+      console.error("Error al obtener balance:", error);
+    }
+  };
+  useEffect(() => {
+    getBalance();
+  }, []);
 
   return (
     <div className="relative min-h-screen w-full bg-[url('/home-tower.webp')] bg-cover bg-center bg-no-repeat text-white bg-fixed">
